@@ -1,0 +1,87 @@
+[project]
+name = "sow-what"
+version = "0.1.0"
+authors = [{ name = "Susan Collins", email = "susancollins93@gmail.com" }]
+description = "Veggie garden planner optimized around companion planting and crop rotation"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "pandas",
+  "parsimonious",
+  "typer",
+  "typing-extensions"
+]
+
+[project.scripts]
+sow-what = "sow_what.main:app"
+
+[tool.pixi.project]
+channels = ["conda-forge", "bioconda"]
+platforms = ["osx-arm64", "linux-64", "linux-aarch64"]
+
+[tool.pixi.environments]
+default = { solve-group = "default" }
+dev = { features = ["dev"], solve-group = "default" }
+docs = { features = ["docs"], solve-group = "default" }
+
+[tool.pixi.dependencies]
+python = ">=3.10"
+
+[tool.pixi.pypi-dependencies]
+sow-what = { path = ".", editable = true }
+
+[project.optional-dependencies]
+dev = [
+  "commitizen",
+  "pre-commit",
+  "ruff",
+  "pytest"
+]
+
+docs = [
+  "numpydoc",                     # human- and machine-readable docstring format
+  "Sphinx",                       # builds HTML docs from docstrings and hand-written reST
+  "sphinx-book-theme",            # pretty doc theme
+  "sphinx-copybutton",            # creates copy-to-clipboard button for code examples
+  "sphinx_design",                # extra layout features for hand-written docs
+  "sphinx-last-updated-by-git",   # add git-determined "last update date" to each doc page
+  "sphinx-new-tab-link",          # open links in new tabs
+  "sphinxcontrib-bibtex",         # add citations across docs
+]
+
+[tool.pytest.ini_options]
+markers = [
+  "remote_integration: Requires network access"
+]
+
+# Linting and formatting configuration
+[tool.ruff]
+line-length = 100
+exclude = ["pixi.lock"]
+
+[tool.ruff.lint]
+# Enable default formatting rules, plus isort-style sorting of imports
+select = ["E4", "E7", "E9", "F", "I001", "I002"]
+ignore = ["E712"]
+
+# Build and release
+[tool.commitizen]
+changelog_file = "CHANGES.rst"
+changelog_format = "RestructuredText"
+major_version_zero = true
+version_provider = "pep621"
+version_files = [
+  "sow_what/__init__.py",
+  "Makefile",
+]
+update_changelog_on_bump = true
+changelog_merge_prerelease = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["sow_what*"]
+namespaces = false
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,24 @@
+// For format details, see https://aka.ms/devcontainer.json
+{
+    "name": "sow_what (container)",
+    "build" : { "dockerfile" : "../Dockerfile" },
+    "workspaceFolder": "/app",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/app,type=bind",
+    "customizations" : {
+        "vscode" : {
+            "extensions": [
+                "charliermarsh.ruff",
+                "ms-azuretools.vscode-docker",
+                "ms-python.debugpy",
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-vscode.makefile-tools"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/app/.pixi/envs/dev/bin/python",
+                "python.testing.pytestArgs": ["-vv", "-s", "test"],
+                "python.testing.pytestEnabled": true
+            }
+        }
+    }
+}
