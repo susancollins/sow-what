@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-sow-what = "sow_what.main:app"
+sow-what = "sow_what.cli:app"
 
 [tool.pixi.project]
 channels = ["conda-forge", "bioconda"]

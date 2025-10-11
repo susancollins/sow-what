@@ -1919,7 +1919,7 @@ packages:
 - pypi: ./
   name: sow-what
   version: 0.1.0
-  sha256: c1f8528a0ea5b1a1219af2dcdf88b7180ed81f2fe25a3130504f43d9f4445d8a
+  sha256: 8550931ce018b18ef9b64548dbea80672fef65f7386060b96492fed553e45fe5
   requires_dist:
   - pandas
   - parsimonious
