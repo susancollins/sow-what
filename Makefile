@@ -85,8 +85,8 @@ clean-build: ## Remove cached Python package builds and distributions
 	rm -rf *.egg-info
 
 clean-docs:
-	rm -rf doc/source/generated
-	rm -rf doc/build
+	rm -rf docs/source/generated
+	rm -rf docs/build
 
 clean-pyc: ## Remove cached Python bytecode
 	find . -name '*.pyc' -exec rm -f {} +
