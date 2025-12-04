@@ -31,13 +31,9 @@ jobs:
           # Install dependencies according to the lock file if present
           locked: true
 
-      # Lint and test using pixi
+      # Lint and test using make targets (which use pixi environments)
       - name: Lint
-        run: |
-          make lint
-        shell: pixi run -e dev bash -e {0}
+        run: make lint
 
       - name: Test
-        run: |
-          make test
-        shell: pixi run -e dev bash -e {0}
+        run: make test
