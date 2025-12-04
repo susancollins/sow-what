@@ -12,5 +12,3 @@ jobs:
   python-checks:
     name: Python lint and test
     uses: ./.github/workflows/python-checks.yml
-    with:
-      python-version: '3.11'
