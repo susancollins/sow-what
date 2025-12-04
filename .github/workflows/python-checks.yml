@@ -1,0 +1,43 @@
+name: Python checks
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        description: "Python version to use for tooling (optional – pixi still controls env)"
+        required: false
+        type: string
+        default: "3.11"
+
+jobs:
+  python-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Optional: set a base Python version for tools like commitizen, etc.
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python-version }}
+
+      # Install pixi and project env (auto-caches environments)
+      - name: Set up pixi
+        uses: prefix-dev/setup-pixi@v0.9.3
+        with:
+          manifest-path: pyproject.toml
+          # Install dependencies according to the lock file if present
+          locked: true
+
+      # Lint and test using pixi
+      - name: Lint
+        run: |
+          make lint
+        shell: pixi run bash -e {0}
+
+      - name: Test
+        run: |
+          make test
+        shell: pixi run bash -e {0}
