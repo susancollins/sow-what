@@ -1,0 +1,14 @@
+name: CI
+
+run-name: CI workflow for "${{ github.event.head_commit.message || 'manual trigger' }}"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  python-checks:
+    name: Python lint and test
+    uses: ./.github/workflows/python-checks.yml

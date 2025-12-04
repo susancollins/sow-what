@@ -56,15 +56,18 @@ shell: ## Open a shell inside the container
 # Code Quality
 # -----------------------------------------------------------------------------
 
-lint: ## Lint code, outside container. Requires pre-commit. Install dev dependencies if you have not already.
+lint: ## Lint code using pixi dev environment
 	@echo Running pre-commit --------------------------------------------------
-	pre-commit run --all-files -v
+	pixi run -e dev pre-commit run --all-files -v
 
 # -----------------------------------------------------------------------------
 # Testing
 # -----------------------------------------------------------------------------
+test: ## Run tests using pixi dev environment
+	@echo Running tests ------------------------------------------------------
+	pixi run -e dev pytest -vv -s tests -m "not remote_integration"
 
-test: build ## Run tests inside container
+test-docker: build ## Run tests inside container
 	docker run -v $(CURDIR):/app -w /app $(BUILD_IMAGE)
 		pixi run -e dev pytest -vv -s tests -m "not remote_integration"
 
