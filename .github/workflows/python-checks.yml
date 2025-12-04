@@ -35,9 +35,9 @@ jobs:
       - name: Lint
         run: |
           make lint
-        shell: pixi run bash -e {0}
+        shell: pixi run -e dev bash -e {0}
 
       - name: Test
         run: |
           make test
-        shell: pixi run bash -e {0}
+        shell: pixi run -e dev bash -e {0}
